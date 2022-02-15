@@ -11,35 +11,15 @@ module.exports = function toReadable(number) {
    if (number === 0) {
       return 'zero';
    }
-
    if (number < 20) {
       return units[number];
    }
 
-   if (number < 100) {
-      const strNum = number.toString();
 
-      if (number % 10 === 0) {
-         return tens[number];
-      } else {
-         return tens[strNum[0]] + ' ' + units[strNum[1]];
-      }
+   const strNum = number.toString();
+   const tenthPart = strNum.slice(-2);
+   const hundredthPart = strNum.slice(-3)
 
-   }
 
-   if (number < 1000) {
-      const strNum = number.toString();
-
-      if (number % 100 === 0) {
-         return units[number] + ' hundred';
-      } else if (number % 10 === 0) {
-         return units[strNum[0]] + ' hundred ' + tens[strNum[1]];
-      }
-      else {
-         return units[strNum[0]] + ' hundred ' + tens[strNum[1]] + ' ' + units[strNum[2]];
-      }
-
-   }
-
-   return 'enter a number < 1000'
+   return
 }

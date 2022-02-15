@@ -1,5 +1,5 @@
 {
-  "name": "rsapp-task-template",
+  "name": "human-readable-number",
   "version": "1.0.0",
   "description": "Template for rsapp task",
   "main": "index.js",
@@ -21,9 +21,10 @@
   },
   "homepage": "https://github.com/Shastel/rsapp-task-template#readme",
   "dependencies": {
-    "chai": "^4.2.0",
+    "chai": "^4.3.6",
     "colors": "^1.4.0",
-    "mocha": "^6.2.2",
+    "mocha": "^6.2.3",
     "semver": "^6.3.0"
-  }
+  },
+  "devDependencies": {}
 }
