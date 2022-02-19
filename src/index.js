@@ -5,8 +5,12 @@ module.exports = function toReadable(number) {
    // Tens
    tens = ['', '', 'twenty', 'thirty', 'forty', 'fifty', 'sixty', 'seventy', 'eighty', 'ninety'];
 
-   // // Scales
-   // scales = ['', 'thousand', 'million', 'billion', 'trillion', 'quadrillion', 'quintillion', 'sextillion', 'septillion', 'octillion', 'nonillion', 'decillion', 'undecillion', 'duodecillion', 'tredecillion', 'quatttuor-decillion', 'quindecillion', 'sexdecillion', 'septen-decillion', 'octodecillion', 'novemdecillion', 'vigintillion', 'centillion'];
+   function addSpace(string) {
+      if (string) {
+         return ' ' + string
+      }
+      return string
+   }
 
    if (number === 0) {
       return 'zero';
@@ -14,12 +18,22 @@ module.exports = function toReadable(number) {
    if (number < 20) {
       return units[number];
    }
-
-
+   if (number % 100 === 0 && (number / 100) < 20) {
+      return units[number / 100] + ' hundred';
+   }
    const strNum = number.toString();
-   const tenthPart = strNum.slice(-2);
-   const hundredthPart = strNum.slice(-3)
+   const lastNum = units[Math.trunc(Number(strNum.slice(-1)))];
+   const tenthPart = Number(strNum.slice(-2));
+   let thousantPart = units[Math.trunc(Number(strNum.slice(-3)) / 100)];
 
+   if (thousantPart) {
+      thousantPart = `${thousantPart} hundred`;
+   }
+   if (tenthPart < 20 && tenthPart >= 10) {
+      return thousantPart + ' ' + units[tenthPart];
+   }
 
-   return
+   const result = thousantPart + addSpace(tens[Math.trunc(tenthPart / 10)]) + addSpace(lastNum);
+
+   return result.trim()
 }
